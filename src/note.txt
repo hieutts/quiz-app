@@ -1,0 +1,28 @@
+
+
+
+homescreen: 
+- Take a quiz
+
+
+quizscreen:
+- Welcomescreen: 
+ + welcome to this quiz
+
+
+- Exam:
+ + list of quiz questions + answer 
+
+
+component: button 
+
+
+db: 
+ 
+- quiz: 10 question => 1 question 4 answers
+- fix order of questions, order of answers
+
+expand: 
+-role instructors => push question 3
+- record: score + question, answer correct + wrong 2
+- user: login / logout => see previous quiz + review  1

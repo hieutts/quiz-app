@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Fira+Sans:wght@500&family=Inconsolata:wght@200&family=JetBrains+Mono:wght@300&family=Manrope:wght@300&family=Playpen+Sans:wght@200;500;600;800&display=swap');
+
+.welcome {
+  margin-top: 70px;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Playpen Sans', cursive;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  // min-height: 100vh;
+  .title {
+    font-size: 30px;
+    font-weight: 800;
+  }
+
+  .input-code {
+    border: none;
+    outline: none;
+    font-size: 20px;
+    font-family: 'Playpen Sans', cursive;
+    width: 200px;
+    border-bottom: 2px solid #02cae0;
+    margin: 10px;
+
+  }
+ 
+  .btn-open {
+    
+  }
+}

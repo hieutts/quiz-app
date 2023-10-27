@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Fira+Sans:wght@500&family=Inconsolata:wght@200&family=JetBrains+Mono:wght@300&family=Manrope:wght@300&family=Playpen+Sans:wght@200;500;600;800&display=swap');
+.home {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:rgb(253,253,253);
+    font-family: 'Playpen Sans', cursive;
+}
+.banner {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 500px;
+    width: 80%;
+    position: relative;
+    border-width: 1px;
+    border-color: black;
+    border-radius: 5px;
+    margin-top: 70px;
+    .background{
+         
+        position: absolute;
+        right: 8%;
+        object-fit: cover;
+        border-radius: 5px;
+        height: 500px;
+    }
+    .slogan {
+        left:10%;
+        display: inline-block;
+        top: 10%;
+        position: absolute;
+        font-weight: 900;
+        color: rgb(31,28,58);
+        font-size: 40px;
+        width: 300px;
+    }
+    .btn-take {
+        position: absolute;
+        bottom: 15%;
+        left: 15%;
+        color: white;
+
+    }
+}
+ 
+
+
+.title {
+    display: flex;
+}
