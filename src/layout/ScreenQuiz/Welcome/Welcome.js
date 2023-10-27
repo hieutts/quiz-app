@@ -7,14 +7,13 @@ export default function Welcome() {
   const nav = useNavigate();
   const {id} = useParams();
   const inputCodeRef = useRef();
-
   const HandleCheckOpenCode = async () => {
     const inputValue = inputCodeRef.current.value;
     const isValid = await import('../../../uitls/StringManage')
       .then(fn => {
         return fn.isCorrectOpenCode(inputValue,'111')
       })
-   return isValid ? nav(`/quiz/${id}/question`) : alert('false')
+   return isValid ? nav(`/quiz/${id}/questions`) : alert('false')
   }
 
   return (

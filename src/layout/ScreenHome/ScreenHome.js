@@ -9,12 +9,11 @@ import { useNavigate } from "react-router-dom";
 export default function ScreenHome() {
   const nav = useNavigate();
   const HandleClick = async () => {
-    // const id = await
-      // import('../ScreenQuiz/QuizService')
-        // .then(api => {
-        //   return api.getQuizId();
-        // })
-        const id = '285498f5-3486-434d-a459-bedb6bcea7ce';
+    const id = await
+      import('../ScreenQuiz/QuizService')
+        .then(api => {
+          return api.getQuizId();
+        })
     return nav(`quiz/${id}`)
   }
   return (

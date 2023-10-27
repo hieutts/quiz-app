@@ -11,7 +11,7 @@ export default function App() {
 
         <Route path='/' element={<ScreenHome />} />
         <Route path='/quiz/:id' element={<ScreenQuiz />}/>
-        <Route path='/quiz/:id/question' element={<Exam />} />
+        <Route path='/quiz/:id/questions' element={<Exam />} />
 
       </Routes>
     </BrowserRouter>
