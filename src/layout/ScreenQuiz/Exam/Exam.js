@@ -68,12 +68,12 @@ export default function Exam() {
   const [remainingTime, SetRemainingTime] =useState(60)
   const [minutes, SetMinutes] = useState(1)
   const [seconds, SetSeconds] = useState(0)
-  // useEffect(()=> { 
-  //   const timerId = setInterval(()=> {
-  //     SetRemainingTime(pre =>  pre-1);
-  //     console.log("SetRemainingTime")
-  //   }, 1000
-  //   )
+  useEffect(()=> { 
+    const timerId = setInterval(()=> {
+      SetRemainingTime(pre =>  pre-1);
+      console.log("SetRemainingTime")
+    }, 1000
+    )
   // //   let minutesNow = Math.floor(remainingTime / 60);
   //    let secondsNow = remainingTime % 60;
   //     SetMinutes(minutesNow)
@@ -92,16 +92,16 @@ export default function Exam() {
   //   displayTime();  
   // }, 1000)
      
-//    return ()=> 
-//       {
-//         clearInterval(timerId);  
-//           HandleSubmit();
-//         }
+   return ()=> 
+      {
+        clearInterval(timerId);  
+          HandleSubmit();
+        }
       
        
     
   
-// }, [])
+}, [])
   return (
     <div className="exam">
       {listQues[currentIndex] &&
