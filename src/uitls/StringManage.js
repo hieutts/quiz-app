@@ -23,7 +23,7 @@ export const getRandomQuestion = (list) => {
 
   const listRandom = [];
   randomNumbers.map(randomNumber => listRandom.push(list[randomNumber]));
-  console.log(listRandom)
+  // console.log(listRandom)
   return listRandom;
 }
 

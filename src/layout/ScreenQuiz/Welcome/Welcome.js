@@ -3,17 +3,16 @@ import CustomButton from "../../../components/CustomButton";
 import './Welcome.scss'
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function Welcome() {
-  const nav = useNavigate();
+export default function Welcome({valid, SetValid}) {
   const {id} = useParams();
   const inputCodeRef = useRef();
   const HandleCheckOpenCode = async () => {
     const inputValue = inputCodeRef.current.value;
-    const isValid = await import('../../../uitls/StringManage')
+    const isCorrectOpenCode= await import('../../../uitls/StringManage')
       .then(fn => {
         return fn.isCorrectOpenCode(inputValue,'111')
       })
-   return isValid ? nav(`/quiz/${id}/questions`) : alert('false')
+     isCorrectOpenCode ? SetValid(true): SetValid(false);
   }
 
   return (

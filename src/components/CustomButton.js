@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 import './CustomButton.scss'
 
-export default function CustomButton({ children,text, to,href, onClick,small,primary,large,rounded,disabled,className, ...passProps }) {
+export default function CustomButton({ children,text, to,href, onClick,small,primary,medium,large,circle,rounded,disabled,className, ...passProps }) {
     let Comp = 'button';
 
     const props = {
@@ -16,6 +16,8 @@ export default function CustomButton({ children,text, to,href, onClick,small,pri
         rounded,
         text,
         small,
+        medium,
+        circle,
         disabled,
         [className] : className
     })

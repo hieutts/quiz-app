@@ -23,7 +23,7 @@ export default function ScreenHome() {
         <img src={banner} alt="banner" className="background" />
 
         <div className="slogan">Challenge Your Knowledge with Every Question!</div>
-        <CustomButton onClick={HandleClick} text className='btn-take'>Play</CustomButton>
+        <CustomButton onClick={HandleClick} text medium className='btn-take'>Play</CustomButton>
       </div>
 
     </div>
