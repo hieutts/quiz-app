@@ -22,5 +22,11 @@ export const getListQuestions = async (idTitle) => {
     return list;
 }
 
+export const getAnswerChoose = async (id) => {
+   const answerId =await localStorage[`answer_${id}`]
+   console.log(answerId)
+   return answerId;
+}
+
 
 

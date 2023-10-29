@@ -27,7 +27,7 @@ export default function ScreenQuiz() {
       }
     };
     fetchListQues();
-  }, []);
+  }, [id]);
 
   console.log(listQues)
   return (
@@ -41,7 +41,7 @@ export default function ScreenQuiz() {
           (
             (isLoadQuestion.current) ?
             (isSubmitted ?
-              (score === null ? <Loading /> : <Result />)
+              (score === null ? <Loading /> : <Result score={score} />)
               :
               <Exam listQues={listQues} isSubmitted={isSubmitted} SetIsSubmitted={SetIsSubmitted} score={score} SetScore={SetScore} />)
             :

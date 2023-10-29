@@ -23,7 +23,6 @@ export const getRandomQuestion = (list) => {
 
   const listRandom = [];
   randomNumbers.map(randomNumber => listRandom.push(list[randomNumber]));
-  // console.log(listRandom)
   return listRandom;
 }
 
@@ -33,23 +32,27 @@ export const getSortAnswer = (list) => {
 }
 
 export const resultOfQuiz = async (records, listQues) => {
-  console.log('111111111111')
-  let scores = 0;
-  await records.sort((a, b) => a.idQues - (b.idQues));
-
-
+  let score =0;
   await listQues.sort((a, b) => a.id - (b.id));
-  for (let i = 0; i < listQues.length; i++) {
-    if (records && records[i]) {
-      let record = records[i];
-      console.log(record, record.isAnswer)
-      const indexAns = await listQues[i].answer.findIndex(a => a.id == record.idAnswer);
-       console.log("333333",indexAns)
-      if (listQues[i].answer[indexAns] && listQues[i].answer[indexAns].isCorrect) {
-        console.log('2222222222222222')
-        scores++;
+  await records.sort((a,b) => a.idQues - b.idQues);
+   
+  for (let i = 0; i< listQues.length -1 ; i++) {
+     for (let j = 0; j < 4 ; j++) {
+      console.log(listQues[i].answer[j].id.toString() , records[i].idAns)
+      if (listQues[i].answer[j].isCorrect && listQues[i].answer[j].id.toString() ===  records[i].idAns){
+        score ++;
       }
+     }
+  }
+  return score;
+}
+
+// remove list answers from localStorage
+export const removeListAnswer =  () => {
+  const lengthLocal =  localStorage.length;
+  for (let i = 0; i < lengthLocal; i++) {
+    if (localStorage.key(0).startsWith('answer')) {
+      localStorage.removeItem(localStorage.key(0));
     }
   }
-  return scores;
 }

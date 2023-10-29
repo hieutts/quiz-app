@@ -1,23 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import CustomButton from "../../../components/CustomButton";
-
 import './Exam.scss'
 import Card from "../../../components/Card/Card";
-import Loading from "../../../components/Loading/Loading";
-import { useNavigate } from "react-router-dom";
 
-export default function Exam({ listQues, isSubmitted, SetIsSubmitted, score, SetScore}) {
+export default function Exam({ listQues, isSubmitted, SetIsSubmitted, score, SetScore }) {
   const [currentIndex, SetCurrentIndex] = useState(0);
-  const [remainingTime, SetRemainingTime] = useState(5);
-
+  const [remainingTime, SetRemainingTime] = useState(300);
   const mins = Math.floor(remainingTime / 60);
   const secs = remainingTime % 60;
   const timeRef = useRef(0)
   const isSubmittedRef = useRef(false);
   const answerRecord = [];
-  // const nav = useNavigate();
+  const initialRecord = useMemo (() => {
+      listQues.map((ques )=>localStorage.setItem(`answer_${ques.id}`, null) )
+  }, [listQues])
   const HandleSubmit = () => {
     SetIsSubmitted(true);
+
+    // qua string manage
     for (let i = 0; i < localStorage.length; i++) {
       if (localStorage.key(i).startsWith('answer')) {
 
@@ -26,22 +26,18 @@ export default function Exam({ listQues, isSubmitted, SetIsSubmitted, score, Set
         answerRecord.push({ idQues: key[1], idAns: value })
       }
     }
-     console.log(score)
-    console.log(answerRecord)
-
+    const sendResult = async () => {
+      try {
+        const fn = await import('../../../uitls/StringManage');
+        score = await fn.resultOfQuiz(answerRecord, listQues);
+        SetScore(score);
+      }
+      catch (e) {
+        console.log(e)
+      }
+    }
+    sendResult();
   }
-  //   const sendResult = async () => {
-  //     try {
-  //       const fn = await import('../../../uitls/StringManage');
-  //        score = await fn.resultOfQuiz(answerRecord, listQues);
-  //     }
-  //     catch (e) {
-  //       console.log(e)
-  //     }
-  //   }
-  //   sendResult();
-  //   console.log(score);
-  // }
 
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -63,33 +59,59 @@ export default function Exam({ listQues, isSubmitted, SetIsSubmitted, score, Set
     };
   }, []);
 
-  return (
+  const [isOpen, SetIsOpen] = useState(false);
 
-    <div className="exam">
-      <Card listQues={listQues} currentIndex={currentIndex} SetCurrentIndex={SetCurrentIndex} />
-      <div className="wrapper-submit">
-        {/* {currentIndex >= (listQues.length - 1) ? */}
+  return (
+<>
+  
+      <div className="exam">
+        <Card listQues={listQues} currentIndex={currentIndex} SetCurrentIndex={SetCurrentIndex} />
+        <div className="wrapper-submit">
           <CustomButton className='submit-btn'
             onClick={() => {
-              isSubmittedRef.current = true;
-              HandleSubmit();
+              SetIsOpen(true)
             }}
             large
             rounded
           >
             Submit
           </CustomButton>
-          {/* : <CustomButton className='submit-btn' disabled large >Submit</CustomButton>
-        } */}
-        <div className="time">
-          {remainingTime >= 0 ? (
-            `${mins < 10 ? `0${mins}` : ` ${mins}`}:${secs < 10 ? `0${secs}` : ` ${secs}`}`
-          ) : (
-            <div>Time out</div>
-          )}
+           
+  
+  
+          <div className="time">
+            {remainingTime >= 0 ? (
+              `${mins < 10 ? `0${mins}` : ` ${mins}`}:${secs < 10 ? `0${secs}` : ` ${secs}`}`
+            ) : (
+              <div>Time out</div>
+            )}
+          </div>
         </div>
+        
       </div>
-    </div>
+       {isOpen &&
+        <div className="dialog">
+         <div className="dialog-wrapper">
+           <div className="dialog-content">
+               <div className="dialog-title">Confirm submit</div>
+               <div className="dialog-question">Are you ready to submit this quiz?</div>
+            </div>
+             <div className="dialog-btn">
+               <CustomButton onClick={() => {
+                 SetIsOpen(false);
+                 isSubmittedRef.current = true;
+                 HandleSubmit();
+               }}
+                 rounded medium
+                 className="btn-option">Submit</CustomButton>
+               <CustomButton onClick={() => SetIsOpen(false)} 
+               rounded medium
+                 className="btn-option">Cancel</CustomButton>
+             </div>
+           </div>
+         
+       </div>}
+</>
   );
 
 }
