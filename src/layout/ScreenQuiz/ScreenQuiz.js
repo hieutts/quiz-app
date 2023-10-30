@@ -47,6 +47,7 @@ export default function ScreenQuiz() {
             :
             <Loading />)
             }
+            
       </div>
     </>
   )

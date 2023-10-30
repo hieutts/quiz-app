@@ -1,9 +1,10 @@
-import React, {   useMemo, useRef, useState } from "react";
+import React, {   useMemo, useRef } from "react";
 import './Card.scss'
 import CustomButton from "../CustomButton";
 
 export default function Card({ listQues, currentIndex, SetCurrentIndex }) {
     const idAnsChoose = useRef();
+ 
     const idQuesChoose = listQues[currentIndex].id;
     const HandleNext = () => {
         if (currentIndex < listQues.length - 1)
@@ -37,13 +38,13 @@ export default function Card({ listQues, currentIndex, SetCurrentIndex }) {
     }, [idQuesChoose, idAnsChoose.current])
      console.log(answersChoose)
 
-    const HandleClickRemove = (idAns, idQues) => () => {
-        const removeItem = localStorage[`answer_${idQues}`]
-        if (removeItem ===  idAns.toString()) {
-            localStorage.setItem(`answer_${idQues}`, null);
-            idAnsChoose.current = null;
-        }
-    }
+    // const HandleClickRemove = (idAns, idQues) => () => {
+    //     const removeItem = localStorage[`answer_${idQues}`]
+    //     if (removeItem ===  idAns.toString()) {
+    //         localStorage.setItem(`answer_${idQues}`, null);
+    //         idAnsChoose.current = null;
+    //     }
+    // }
     return (
 
         <div className="wrapper-exam">
@@ -56,25 +57,25 @@ export default function Card({ listQues, currentIndex, SetCurrentIndex }) {
             <div className="answers">
                 {answersIndex.map((answerIndex, index) => {
                     return (
-                        answersChoose != answerSort[index].id ? (<div className="answer" key={index}
+                          <div className={`answer`}key={index}
                             onClick={
 
                                 HandleClickAnswer(answerSort[index].id, listQues[currentIndex].id)
 
                             }
                         >
-                            <span className="index">{answerIndex}</span>
+                            <span className={` ${answersChoose != answerSort[index].id ? `index ` : `index-choose`}`}> {answerIndex} </span>
                             <CustomButton className="ans-content">{answerSort[index].content}</CustomButton>
-                        </div>)
-                            :
-                            <div key={index} className="answer-choose"
-                            >
+                        </div>
+                    //         :
+                    //         <div key={index} className="answer-choose"
+                    //         >
                                   
-                            <CustomButton className="ans-content-choose">{answerSort[index].content}</CustomButton>
-                            <span className="remove-btn"
-                                 onClick={HandleClickRemove(answerSort[index].id, listQues[currentIndex].id)}
-                                 >&times;</span>
-                            </div>
+                    //         <CustomButton className="ans-content-choose">{answerSort[index].content}</CustomButton>
+                    //         <span className="remove-btn"
+                    //              onClick={HandleClickRemove(answerSort[index].id, listQues[currentIndex].id)}
+                    //              >&times;</span>
+                    //         </div>
                     )
                 })}
             </div>
