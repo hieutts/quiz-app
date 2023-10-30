@@ -1,10 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, {   useMemo, useRef, useState } from "react";
 import './Card.scss'
 import CustomButton from "../CustomButton";
-import { getAnswerChoose } from "../../layout/ScreenQuiz/QuizService";
 
 export default function Card({ listQues, currentIndex, SetCurrentIndex }) {
-    const [isChoose, SetIsChoose] = useState(false);
     const idAnsChoose = useRef();
     const idQuesChoose = listQues[currentIndex].id;
     const HandleNext = () => {
