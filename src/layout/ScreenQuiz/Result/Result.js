@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import './Result.scss'
 import icon from "../../../assets/IconCongra.png";
 import CustomButton from "../../../components/CustomButton";
+import './Result.scss';
 export default function Result({ score }) {
     useEffect(() => {
 

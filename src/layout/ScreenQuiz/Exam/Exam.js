@@ -4,7 +4,7 @@ import './Exam.scss'
 import Card from "../../../components/Card/Card";
 
 export default function Exam({ listQues, isSubmitted, SetIsSubmitted, score, SetScore }) {
-  const [currentIndex, SetCurrentIndex] = useState(0);
+  const [isOpen, SetIsOpen] = useState(false);
   const [remainingTime, SetRemainingTime] = useState(300);
   const mins = Math.floor(remainingTime / 60);
   const secs = remainingTime % 60;
@@ -53,19 +53,22 @@ export default function Exam({ listQues, isSubmitted, SetIsSubmitted, score, Set
         clearInterval(timerId)
       }
     }, 1000);
+ 
+    
 
     return () => {
       clearInterval(timerId);
     };
   }, []);
 
-  const [isOpen, SetIsOpen] = useState(false);
+  
+ 
 
   return (
 <>
   
       <div className="exam">
-        <Card listQues={listQues} currentIndex={currentIndex} SetCurrentIndex={SetCurrentIndex} />
+        <Card listQues={listQues}  />
         <div className="wrapper-submit">
           <CustomButton className='submit-btn'
             onClick={() => {

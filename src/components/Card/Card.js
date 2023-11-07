@@ -1,9 +1,11 @@
-import React, {   useMemo, useRef } from "react";
+import React, {   useMemo, useRef, useState } from "react";
 import './Card.scss'
 import CustomButton from "../CustomButton";
 
-export default function Card({ listQues, currentIndex, SetCurrentIndex }) {
+export default function Card({ listQues}) {
+    const [currentIndex, SetCurrentIndex] = useState(0)
     const idAnsChoose = useRef();
+    const [arrResult, SetArrResult] = useState([]);
  
     const idQuesChoose = listQues[currentIndex].id;
     const HandleNext = () => {
@@ -27,6 +29,7 @@ export default function Card({ listQues, currentIndex, SetCurrentIndex }) {
     const HandleClickAnswer = (idAns, idQues) => () => {
         idAnsChoose.current = idAns;
         HandleChooseAns(idAns, idQues);
+        SetArrResult({...arrResult, [`${idQues}`]: idAns })
 
     }
 
@@ -36,15 +39,9 @@ export default function Card({ listQues, currentIndex, SetCurrentIndex }) {
         const answerId = localStorage[`answer_${idQuesChoose}`]
         return answerId;
     }, [idQuesChoose, idAnsChoose.current])
-     console.log(answersChoose)
+     console.log(arrResult)
 
-    // const HandleClickRemove = (idAns, idQues) => () => {
-    //     const removeItem = localStorage[`answer_${idQues}`]
-    //     if (removeItem ===  idAns.toString()) {
-    //         localStorage.setItem(`answer_${idQues}`, null);
-    //         idAnsChoose.current = null;
-    //     }
-    // }
+    
     return (
 
         <div className="wrapper-exam">
@@ -64,7 +61,7 @@ export default function Card({ listQues, currentIndex, SetCurrentIndex }) {
 
                             }
                         >
-                            <span className={` ${answersChoose != answerSort[index].id ? `index ` : `index-choose`}`}> {answerIndex} </span>
+                            <span className={`${answersChoose != answerSort[index].id ? `index ` : `index-choose`}`}> {answerIndex} </span>
                             <CustomButton className="ans-content">{answerSort[index].content}</CustomButton>
                         </div>
                     //         :
